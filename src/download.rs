@@ -105,7 +105,7 @@ pub fn get_link_pvprp(url: &str) -> anyhow::Result<String> {
     Ok(format!("https://pvprp.com/{}", match_two.as_str()))
 }
 pub fn get_link_mediafire(url: &str) -> anyhow::Result<String> {
-    let regexp = Regex::new(".*zip.*")?;
+    let regexp = Regex::new("https://download[^\"]*")?;
     let resp = ureq::get(&url).call()?;
     let body = resp.into_string().unwrap();
     let match_one = regexp.find(&body).unwrap().as_str();
